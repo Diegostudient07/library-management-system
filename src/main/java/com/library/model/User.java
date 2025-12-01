@@ -48,6 +48,9 @@ public class User {
     }
 
     public void setUserId(String userId) {
+        if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("User ID cannot be null or empty");
+        }
         this.userId = userId;
     }
 
@@ -56,6 +59,9 @@ public class User {
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
         this.name = name;
     }
 
@@ -64,6 +70,9 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Email must contain @");
+        }
         this.email = email;
     }
 

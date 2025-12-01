@@ -91,6 +91,18 @@ class UserTest {
     }
 
     @Test
+    void testSetterValidation() {
+        User user = new User("U001", "Alice", "alice@email.com");
+        
+        assertThrows(IllegalArgumentException.class, () -> user.setUserId(null));
+        assertThrows(IllegalArgumentException.class, () -> user.setUserId(""));
+        assertThrows(IllegalArgumentException.class, () -> user.setName(null));
+        assertThrows(IllegalArgumentException.class, () -> user.setName(""));
+        assertThrows(IllegalArgumentException.class, () -> user.setEmail(null));
+        assertThrows(IllegalArgumentException.class, () -> user.setEmail("invalidemail"));
+    }
+
+    @Test
     void testToString() {
         User user = new User("U001", "Alice", "alice@email.com");
         String toString = user.toString();

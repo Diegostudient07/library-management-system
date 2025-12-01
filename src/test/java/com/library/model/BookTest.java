@@ -68,6 +68,18 @@ class BookTest {
     }
 
     @Test
+    void testSetterValidation() {
+        Book book = new Book("978-0451524935", "1984", "George Orwell");
+        
+        assertThrows(IllegalArgumentException.class, () -> book.setIsbn(null));
+        assertThrows(IllegalArgumentException.class, () -> book.setIsbn(""));
+        assertThrows(IllegalArgumentException.class, () -> book.setTitle(null));
+        assertThrows(IllegalArgumentException.class, () -> book.setTitle(""));
+        assertThrows(IllegalArgumentException.class, () -> book.setAuthor(null));
+        assertThrows(IllegalArgumentException.class, () -> book.setAuthor(""));
+    }
+
+    @Test
     void testToString() {
         Book book = new Book("978-0451524935", "1984", "George Orwell");
         String toString = book.toString();

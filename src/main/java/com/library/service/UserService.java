@@ -35,6 +35,9 @@ public class UserService {
     }
 
     public User findUserById(String userId) {
+        if (userId == null) {
+            return null;
+        }
         return users.stream()
                 .filter(user -> user.getUserId().equals(userId))
                 .findFirst()
