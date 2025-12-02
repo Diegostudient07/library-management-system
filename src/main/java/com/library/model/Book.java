@@ -6,14 +6,20 @@ public class Book {
     private String author;
     private boolean available;
 
-    public Book(String isbn, String title, String author, boolean available) {
+    public Book(String isbn, String title, String author) {
         if (isbn == null || isbn.isEmpty()) {
             throw new IllegalArgumentException("ISBN cannot be null or empty");
+        }
+        if (title == null || title.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
+        if (author == null || author.isEmpty()) {
+            throw new IllegalArgumentException("Author cannot be null or empty");
         }
         this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.available = available;
+        this.available = true;
     }
 
     // Getters and Setters
