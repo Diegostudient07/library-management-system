@@ -147,4 +147,31 @@ public class LibraryServiceTest {
         double feeNull = libraryService.calculateLateFee(null);
         assertEquals(0.0, feeNull, 0.01);
     }
+
+    @Test
+    public void testMultipleLoansAndReturns() {
+        libraryService.loanBook("978-0-13-468599-1", "U001");
+        libraryService.loanBook("978-0-13-235088-4", "U002");
+        assertEquals(2, libraryService.getActiveLoans().size());
+        
+        libraryService.returnBook("978-0-13-468599-1", "U001");
+        assertEquals(1, libraryService.getActiveLoans().size());
+        
+        libraryService.returnBook("978-0-13-235088-4", "U002");
+        assertEquals(0, libraryService.getActiveLoans().size());
+    }
+
+    @Test
+    public void testLoanBookNullIsbn() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            libraryService.loanBook(null, "U001");
+        });
+    }
+
+    @Test
+    public void testLoanBookNullUserId() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            libraryService.loanBook("978-0-13-468599-1", null);
+        });
+    }
 }

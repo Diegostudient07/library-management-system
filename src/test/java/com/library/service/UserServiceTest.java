@@ -97,4 +97,28 @@ public class UserServiceTest {
         List<User> allUsers = userService.getAllUsers();
         assertEquals(2, allUsers.size());
     }
+
+    @Test
+    public void testGetAllUsersEmpty() {
+        List<User> allUsers = userService.getAllUsers();
+        assertEquals(0, allUsers.size());
+    }
+
+    @Test
+    public void testGetTotalUsersInitial() {
+        assertEquals(0, userService.getTotalUsers());
+    }
+
+    @Test
+    public void testGetTotalUsersAfterAdd() {
+        User user = new User("U001", "Diego", "diego@example.com");
+        userService.registerUser(user);
+        assertEquals(1, userService.getTotalUsers());
+    }
+
+    @Test
+    public void testFindUserByIdNotFound() {
+        User user = userService.findUserById("U999");
+        assertNull(user);
+    }
 }

@@ -123,4 +123,39 @@ public class BookServiceTest {
         assertEquals(1, availableBooks.size());
         assertEquals("Clean Code", availableBooks.get(0).getTitle());
     }
+
+    @Test
+    public void testFindByTitleCaseInsensitive() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        bookService.addBook(book);
+        
+        List<Book> results = bookService.findByTitle("EFFECTIVE");
+        assertEquals(1, results.size());
+    }
+
+    @Test
+    public void testFindByAuthorCaseInsensitive() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        bookService.addBook(book);
+        
+        List<Book> results = bookService.findByAuthor("JOSHUA");
+        assertEquals(1, results.size());
+    }
+
+    @Test
+    public void testGetAllBooksEmpty() {
+        List<Book> allBooks = bookService.getAllBooks();
+        assertEquals(0, allBooks.size());
+    }
+
+    @Test
+    public void testGetAvailableBooksEmpty() {
+        List<Book> availableBooks = bookService.getAvailableBooks();
+        assertEquals(0, availableBooks.size());
+    }
+
+    @Test
+    public void testGetTotalBooksInitial() {
+        assertEquals(0, bookService.getTotalBooks());
+    }
 }

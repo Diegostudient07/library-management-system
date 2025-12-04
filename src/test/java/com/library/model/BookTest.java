@@ -77,4 +77,24 @@ public class BookTest {
         book.setAvailable(false);
         assertFalse(book.isAvailable());
     }
+
+    @Test
+    public void testToString() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        String result = book.toString();
+        
+        assertTrue(result.contains("978-0-13-468599-1"));
+        assertTrue(result.contains("Effective Java"));
+        assertTrue(result.contains("Joshua Bloch"));
+        assertTrue(result.contains("available=true"));
+    }
+
+    @Test
+    public void testToStringNotAvailable() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        book.setAvailable(false);
+        String result = book.toString();
+        
+        assertTrue(result.contains("available=false"));
+    }
 }

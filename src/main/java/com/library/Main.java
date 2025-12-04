@@ -73,7 +73,8 @@ public class Main {
         scanner.close();
     }
 
-    private static void cargarDatosIniciales() {
+    // Hacer público para testing
+    public static void cargarDatosIniciales() {
         // Agregar libros de ejemplo - Programación
         bookService.addBook(new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch"));
         bookService.addBook(new Book("978-0-13-235088-4", "Clean Code", "Robert C. Martin"));
@@ -90,6 +91,26 @@ public class Main {
         userService.registerUser(new User("U001", "Diego", "diego@example.com"));
         userService.registerUser(new User("U002", "María", "maria@example.com"));
         userService.registerUser(new User("U003", "Carlos", "carlos@example.com"));
+    }
+
+    // Getters para testing
+    public static BookService getBookService() {
+        return bookService;
+    }
+
+    public static UserService getUserService() {
+        return userService;
+    }
+
+    public static LibraryService getLibraryService() {
+        return libraryService;
+    }
+
+    // Método para inicializar servicios (útil para tests)
+    public static void initializeServices() {
+        bookService = new BookService();
+        userService = new UserService();
+        libraryService = new LibraryService(bookService, userService);
     }
 
     private static void mostrarMenu() {

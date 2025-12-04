@@ -85,4 +85,39 @@ public class UserTest {
             new Loan(book4, user);
         });
     }
+
+    @Test
+    public void testToString() {
+        User user = new User("U001", "Diego", "diego@example.com");
+        String result = user.toString();
+        
+        assertTrue(result.contains("U001"));
+        assertTrue(result.contains("Diego"));
+        assertTrue(result.contains("diego@example.com"));
+        assertTrue(result.contains("activeLoans=0"));
+    }
+
+    @Test
+    public void testToStringWithLoans() {
+        User user = new User("U001", "Diego", "diego@example.com");
+        Book book = new Book("978-1", "Book 1", "Author 1");
+        new Loan(book, user);
+        
+        String result = user.toString();
+        assertTrue(result.contains("activeLoans=1"));
+    }
+
+    @Test
+    public void testSetters() {
+        User user = new User("U001", "Diego", "diego@example.com");
+        
+        user.setUserId("U002");
+        assertEquals("U002", user.getUserId());
+        
+        user.setName("Maria");
+        assertEquals("Maria", user.getName());
+        
+        user.setEmail("maria@example.com");
+        assertEquals("maria@example.com", user.getEmail());
+    }
 }

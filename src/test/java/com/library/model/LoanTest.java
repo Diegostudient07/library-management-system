@@ -99,4 +99,55 @@ public class LoanTest {
             new Loan(book, null);
         });
     }
+
+    @Test
+    public void testToString() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        User user = new User("U001", "Diego", "diego@example.com");
+        Loan loan = new Loan(book, user);
+        
+        String result = loan.toString();
+        assertTrue(result.contains("Effective Java"));
+        assertTrue(result.contains("Diego"));
+        assertTrue(result.contains("returnDate=null"));
+    }
+
+    @Test
+    public void testToStringAfterReturn() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        User user = new User("U001", "Diego", "diego@example.com");
+        Loan loan = new Loan(book, user);
+        loan.returnBook();
+        
+        String result = loan.toString();
+        assertFalse(result.contains("returnDate=null"));
+    }
+
+    @Test
+    public void testGetters() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        User user = new User("U001", "Diego", "diego@example.com");
+        Loan loan = new Loan(book, user);
+        
+        assertNotNull(loan.getBook());
+        assertEquals(book, loan.getBook());
+        
+        assertNotNull(loan.getUser());
+        assertEquals(user, loan.getUser());
+        
+        assertNotNull(loan.getLoanDate());
+        assertNotNull(loan.getDueDate());
+        assertNull(loan.getReturnDate());
+    }
+
+    @Test
+    public void testGetReturnDateAfterReturn() {
+        Book book = new Book("978-0-13-468599-1", "Effective Java", "Joshua Bloch");
+        User user = new User("U001", "Diego", "diego@example.com");
+        Loan loan = new Loan(book, user);
+        
+        assertNull(loan.getReturnDate());
+        loan.returnBook();
+        assertNotNull(loan.getReturnDate());
+    }
 }
